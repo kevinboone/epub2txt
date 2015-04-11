@@ -1,0 +1,4 @@
+CC=/home/kevin/lib/android-9-toolchain_2/bin/arm-linux-androideabi-gcc
+
+all:
+	EXTRA_CFLAGS="-fpie -fpic" EXTRA_LDFLAGS="-pie" CC=$(CC) make -f Makefile

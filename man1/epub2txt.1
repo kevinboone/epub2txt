@@ -1,0 +1,103 @@
+.\" Copyright (C) 2013 Kevin Boone 
+.\" Permission is granted to any individual or institution to use, copy, or
+.\" redistribute this software so long as all of the original files are
+.\" included, and that this copyright notice is retained.
+.\"
+.TH epub2txt 1 "April 2013"
+.SH NAME
+epub2txt \- Extract text from EPUB documents 
+.SH SYNOPSIS
+.B epub2txt 
+.RB [options]\ {files...} 
+.PP
+
+.SH DESCRIPTION
+\fIepub2txt\fR is simple utility for extracting text from EPUB
+documents. It is mainly intended for reading EPUB e-books on systems
+that cannot run a graphical EPUB viewer, and favours speed over
+optimal rendering of complex layout.
+
+The output is to \fIstdout\fR; if multiple files are specified,
+they are simply processed sequentially. Unless otherwise specified,
+the character encoding of the output is the same as for the EPUB
+source, which is invariably UTF-8. However, \fIepub2txt\fR can
+attempt to output plain ASCII if so instructed.
+
+
+.SH "OPTIONS"
+.TP
+.BI -a,\-\-ascii
+Converts Unicode characters in the EPUB document that have close
+ASCII equivalents to ASCII, and replaces any others with '?'. 
+For example, the Unicode left single quote is similar to
+an ASCII straight quote. This option is intended for use when feeding
+the output of \fIepub2txt\fR into another utility that cannot deal
+with UTF8 encoding.
+.LP
+.TP
+.BI -d,\-\-debug {0-4}
+Set the level of debugging information, from 0 (none) to
+4 (extremely detailed tracing).
+.LP
+.TP
+.BI -n,\-\-notrim
+If no output width is specified, then this option bypasses
+\fIepub2txt\fR's processing of whitespace. Normally whitespace is
+trimmed from the beginnings of lines, and multiple whitespace in the 
+middle of a line is condensed to a single space. Bypassing whitespace
+trimming makes operation considerably faster on long documents, but 
+is really only useful if the output of \fIepub2txt\fR is being further
+processed by something else that formats the text. This option is 
+incompatible with \fB-w\fR.
+.LP
+.TP
+.BI -p,\-\-paras {count}
+Write out the paragraph number every {count} paragraphs. The paragraph
+number is written in the form *** PARA NNN, to make it noticeable. 
+\fB--paras\fR and \fB--start\fR provide a simple way to resume reading
+a document from a specific point.  
+.LP
+.TP
+.BI -s,\-\-start {para}
+Start output from paragraph {para} in the source document. The
+\fB--paras\fR option tells \fIepub2txt\fR to print the paragraph
+number at particular intervals; this paragraph number can then
+be used as the argument to \fB--start\fR to resume reading from
+a particular point. The value of \fB--paras\fR depends on the amount
+of text that will fit on the screen and, to some extent, the typical
+length of a paragraph in the source document. Too small a value makes
+the paragraph marks intrusive when reading; too large and it can be
+quite difficult to find the current paragraph number. Note that
+\fBepub2txt\fR specifies document position in paragraphs rather than 
+lines or pages,
+because paragraphs are a feature of the source document, whilst
+lines and pages will vary according to the amount of text that fits
+on the screen.
+.LP
+.TP
+.BI -w,\-\-width {columns}
+Format the output to fit into a specified width. If this option is
+omitted, or is set to zero, then the output is assumed to be of
+unlimited width. Otherwise, line breaks are inserted to keep the output
+within the specified width. For direct reading, it is usually helpful
+to set a width. For situations where the output is being processed
+by another application, it is nearly always better to omit this option,
+and let target application handle line breaking or justification 
+itself. This is because in a plain text document, there is no way
+for the target application to distinguish line breaks inserted by
+\fIepub2txt\fR for formatting, from line breaks that were part of the
+document structure (e.g., between paragraphs). 
+.LP
+.TP
+.BI -v,\-\-version
+Displays the version and copyright infomation.
+.LP
+
+.SH AUTHOR AND LEGAL
+\fIepub2txt\fR
+is maintained by Kevin Boone, and is open source under the
+terms of the GNU Public Licence, version 2.0. There is no warranty
+of any kind.
+
+
+.\" end of file

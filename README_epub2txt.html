@@ -1,0 +1,173 @@
+<a href="software.html">&bull; Software</a>
+<a href="utility_corner.html">&bull; Utility corner</a>
+
+<p>
+
+<h1>epub2txt -- Extract text from EPUB documents</h1> 
+
+Version 0.1.1, April 2015
+
+<h2>What is this?</h2>
+
+<code>epub2html</code> is a simple command-line utility for 
+extracting text from
+EPUB documents and, optionally, re-flowing it to fit a text display
+of a particular number of columns. It is written entirely in ANSI-standard
+C, and should run on any Unix-like system with a C compiler. It is
+intended for reading EPUB e-books on embedded systems that can't host a 
+graphical EPUB viewer, or converting such e-books to read on those systems.
+However, it should be robust enough for other purposes, such as batch 
+indexing of EPUB document collections.
+</p>
+<code>epub2html</code> favours speed and low memory usage over
+accuracy of rendering. Most of the formatting of the source document
+will be lost but, with a text-only display, this is likely to be of
+little consequence.
+</p>
+This utility is specifically written to have no dependencies on external
+libraries, except the standard C library, and even on this is makes
+few demands. It does expect to be able to run an "unzip" command,
+however. The purpose of minimizing dependencies is to allow the 
+utility to build on embedded systems without needing to build a bunch
+of dependencies.
+</p>
+<code>epub2txt</code> will output UTF8-encoded text by default, but can
+be told to output ASCII, in which case it will try to convert non-ASCII
+characters into something displayable if possible.
+
+<h2>Prerequisites</h2>
+
+<code>epub2html</code> is intended to run on Linux and other Unix-like
+systems. It makes use of the common Unix <code>unzip</code> utility
+but has no other dependencies. 
+It builds and runs on Windows under Cygwin,
+but not as a native Windows console application.
+The system must be set up such that there is a temporary
+directory at <code>/tmp</code> that users can write to, unless the
+environment variable <code>TMP</code> is set, in which case the utility
+will use that instead. 
+
+<h2>Building and installing</h2>
+
+<code>epub2txt</code> builds and installs from a simple Makefile.
+On most systems, all you should need to do is
+
+<pre class="codeblock">
+$ make
+# make install
+</pre>
+
+
+<h2>Bugs and limitations</h2>
+
+There is no support for any form of DRM or encryption, and such support
+is unlikely to be added in the future.
+<p/>
+
+<code>epub2txt</code> only handles documents that use 
+UTF8 (or ASCII) encoding (but I believe that UTF8 is more-or-less 
+universal in EPUB), 
+and writes output only in UTF8 encoding,
+regardless of the platform's locale. This limitation exists because
+<code>epub2txt</code> does all its own multibyte to fixed-size 
+character encoding conversions
+to avoid creating a dependency on an external library. Doing this for UTF8
+is enough work on its own; doing it for arbitrary encodings would be 
+overwhelming. 
+<p/>
+The program can't correct errors in encoding, and there are a large number
+of EPUB documents in public repositories that contain encoding errors.
+A common problem is spurious use of non-UTF8 8-bit characters, often 
+in documents that have been converted from Microsoft Office applications.
+<p/>
+
+<code>epub2txt</code> does not right-justify text, as there are already many
+good utilities to do this. A simple approach is to pipe the output 
+into <code>nroff</code>, without specifying a width (<code>-w</code>).
+Not specifying a width turns off line-breaking in <code>epub2txt</code>,
+allowing <code>nroff</code> to justify the paragraphs. 
+It will probably
+also be necessary to use the <code>--ascii</code> option, 
+as <code>nroff</code> does not 
+handle UTF8 text very well. For example:
+
+<pre class="codeblock">
+epub2txt -a mydoc.epub | nroff
+</pre>
+<p/>
+
+<code>epub2txt</code> extracts text aggressively, and will include things that
+cannot possibly be rendered properly in plain text. This includes constructs
+like indices and tables of contents, which will be of little use. The captions
+of pictures will also likely be included, even though the pictures themselves
+can not. It seemed
+better to err on the side of extracting too much text than too little;
+unfortunately there is little in the EPUB format to distinguish content that
+is meaningful in a text-only representation from that which is not. 
+<p/>
+
+It is unlikely that any kind of fixed-layout structure of the 
+source document will be rendered accurately in plain text, so
+<code>epub2txt</code> does not try. Tabs and other layout elements are 
+collapsed
+into spaces, and text re-flowed according to the set line length, if any.
+
+<p/>
+Conversion of Unicode to ASCII is, in the general case, impossible. The
+<code>--ascii</code> switch tells <code>epub2txt</code> to perform some
+common conversions, such as straight quotes for angled quotes.
+It will also attempt to replace accented latin characters with non-accented
+equivalents, at least for commonly-used characters. However, there are
+a huge number of characters in the Unicode set that cannot be rendered,
+even approximately, in ASCII. 
+
+<h2>Revision history</h2>
+
+<table cellpadding="5" cellspacing="5">
+<tr>
+<td valign="top">
+0.1.1,&nbsp;April&nbsp;2015
+</td>
+<td valign="top">
+Fixed some bugs with integer sizes that caused problems on 64-bit systems
+</td>
+</tr>
+<tr>
+<td valign="top">
+0.0.1
+</td>
+<td valign="top">
+First functional release
+</td>
+</tr>
+</table>
+ 
+
+<h2>Downloads</h2>
+
+Please read the installation instructions before downloading. Note also
+that only the source bundle is sure to be up-to-date; the binaries depend
+on the availability of specific build platforms, and always lag the
+source by a minor version or two.
+<p/>
+
+<a href="epub2txt-0.1.1.tar.gz">Source code bundle for all platforms</a><br/>
+<a href="epub2txt_cygwin.exe">Compiled binary for Cygwin on Windows</a><br/>
+<a href="epub2txt_0.1.0_kbox.deb">KBOX installer package</a> for use with <a href="kbox2.html">KBOX2</a> on Android devices<br/>
+<a href="epub2txt_0.1_kbox3.deb">KBOX installer package</a> for use with <a href="kbox3.html">KBOX3</a> on Android devices<br/>
+
+<h2>Further information</h2>
+
+<a href="epub2txt.man.html">epub2txt man page</a><br/>
+
+
+<h2>Author and legal</h2>
+
+<i>epub2txt</i> is maintained by Kevin Boone, and distributed under the terms
+of the GNU Public Licence, v2.0. Essentially, this means that you may 
+use this software as you wish, at your own risk, provided that the 
+original author continues to be acknowledged.
+<p/>
+Please report bugs, etc., using the details on the
+<a href="contact.html">contact page</a>.
+
