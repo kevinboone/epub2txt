@@ -462,7 +462,7 @@ void epub2txt_flush_para (const klib_String *para, int width, BOOL notrim)
           {
           printf ("\n\n*** PARA %d\n\n", output_para);
           }
-      printf (klib_string_cstr (para));
+      puts (klib_string_cstr (para));
       }
     }
    else
@@ -522,7 +522,7 @@ void epub2txt_flush_para (const klib_String *para, int width, BOOL notrim)
             printf ("\n");
             col = 0;
             }
-          printf (klib_string_cstr (word));
+          printf ("%s", klib_string_cstr (word));
           printf (" ");
           col += wordlen + 1;
           klib_string_set (word, "");
@@ -544,7 +544,7 @@ void epub2txt_flush_para (const klib_String *para, int width, BOOL notrim)
         {
         printf ("\n");
         }
-      printf (klib_string_cstr (word)); 
+      printf ("%s", klib_string_cstr (word)); 
       klib_string_free (word);
       free (s);
       }
@@ -730,6 +730,24 @@ void epub2txt_parse_html (const char *filename, BOOL ascii,
           }
         else if ((strcasecmp (ss_tag, "br/") == 0) 
             || (strcasecmp (ss_tag, "br") == 0))
+          {
+          if (inbody)
+            {
+            if (epub2txt_all_white(klib_string_cstr(para)))
+              can_newline = FALSE; 
+            else
+              can_newline = TRUE; 
+            epub2txt_flush_para (para, width, notrim); 
+            klib_string_set (para, "");
+            if (can_newline)
+              {
+              epub2txt_line_break();
+              can_newline = FALSE;
+              }
+            }
+          }
+        else if ((strcasecmp (ss_tag, "b/") == 0) 
+            || (strcasecmp (ss_tag, "b") == 0))
           {
           if (inbody)
             {

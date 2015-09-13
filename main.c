@@ -55,7 +55,7 @@ void show_long_usage (FILE *f, const char *argv0)
 void show_version (FILE *f, const char *argv0)
   {
   fprintf (f, "epub2txt version " VERSION "\n");
-  fprintf (f, "Copyright (c)2013 Kevin Boone\n");
+  fprintf (f, "Copyright (c)2013-2015 Kevin Boone\n");
   }
 
 
