@@ -1,6 +1,6 @@
 /*========================================================================
   epub2txt
-  Copyright (c)2012-2015 Kevin Boone
+  Copyright (c)2012-2016 Kevin Boone
   Distributed under the terms of the GPV, version 2.0 
 =========================================================================*/
 
@@ -55,7 +55,7 @@ void show_long_usage (FILE *f, const char *argv0)
 void show_version (FILE *f, const char *argv0)
   {
   fprintf (f, "epub2txt version " VERSION "\n");
-  fprintf (f, "Copyright (c)2013-2015 Kevin Boone\n");
+  fprintf (f, "Copyright (c)2013-2016 Kevin Boone\n");
   }
 
 

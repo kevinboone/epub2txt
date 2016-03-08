@@ -1364,6 +1364,18 @@ int XMLDoc_parse_file_SAX(const SXML_CHAR* filename, const SAX_Callbacks* sax, v
 		if (f == NULL) return false;
 	}
 #endif
+
+// Nasty kludge to skip a UTF-8 BOM without enabling the rest of the 
+// (broken) unicode support 
+int c1 = fgetc (f);
+int c2 = fgetc (f);
+int c3 = fgetc (f);
+if (c1 == 0xEF && c2 == 0xBB && c3 == 0xBF)
+  fseek (f, 3, SEEK_SET);
+else
+  fseek (f, 0, SEEK_SET);
+
+
         klib_log_trace ("Calling SAX parser on file %s", filename);
 	ret = _parse_data_SAX((void*)f, DATA_SOURCE_FILE, sax, &sd);
         klib_log_trace ("SAX parse done");
