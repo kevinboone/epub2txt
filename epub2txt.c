@@ -876,7 +876,11 @@ void epub2txt_do_file (const char *file, BOOL ascii, int width, BOOL notrim,
     klib_log_debug ("Running unzip command; %s", cmd);
     system (cmd);
     klib_log_debug ("Unzip finished");
-
+    sprintf (cmd, "chmod -R 744 \"%s\"", tempdir);
+    klib_log_debug ("Fix permissions: %s", cmd);
+    system (cmd);
+    klib_log_debug ("Permissions fixed");
+    
     char opf[512];
     sprintf (opf, "%s/META-INF/container.xml", tempdir);
     klib_String *rootfile = epub2txt_get_root_file (opf, error);
