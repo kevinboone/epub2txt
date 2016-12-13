@@ -6,7 +6,6 @@ klib_path.c
 #ifdef WIN32
 #include <windows.h>
 #endif
-#include <malloc.h>
 #include <stdarg.h>
 #include <string.h>
 #include <errno.h>

@@ -4,7 +4,6 @@ klib_log.c
 (c)2000-2012 Kevin Boone
 ============================================================================*/
 
-#include <malloc.h>
 #include <stdarg.h>
 #include <string.h>
 #include <errno.h>

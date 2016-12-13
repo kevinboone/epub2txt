@@ -5,7 +5,6 @@ klib_wstring.c
 ============================================================================*/
 #undef __STRICT_ANSI__
 
-#include <malloc.h>
 #include <stdarg.h>
 #include <string.h>
 #include <errno.h>
