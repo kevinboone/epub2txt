@@ -8,6 +8,9 @@ klib_buffer.c
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
+#ifndef __APPLE__
+#include <malloc.h>
+#endif
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>

@@ -7,6 +7,9 @@ klib_error.c
 #include <errno.h>
 #include <stdarg.h>
 #include <stdio.h>
+#ifndef __APPLE__
+#include <malloc.h>
+#endif
 #include <string.h>
 #include "klib_string.h"
 #include "klib_error.h"
