@@ -452,7 +452,7 @@ void epub2txt_flush_para (const klib_String *para, int width, BOOL notrim)
   output_para++;
   if (start_para != 0 && output_para < start_para) return;
 
-  // While it is be quicker just to dump the para to stdout in
+  // While it is quicker just to dump the para to stdout in
   //  unlimited-line-length mode, doing this doesn't get us the
   //  benefit of trimming whitespace, etc
   if (width == 0 && notrim)
@@ -486,7 +486,7 @@ void epub2txt_flush_para (const klib_String *para, int width, BOOL notrim)
         {
         char c = s[i];
 
-        if (mode == MODE_START && (c == ' ' 
+        /*if (mode == MODE_START && (c == ' ' 
              || (unsigned char) c == (unsigned char)0xC2))
           {
           if (i < l - 1)
@@ -498,11 +498,30 @@ void epub2txt_flush_para (const klib_String *para, int width, BOOL notrim)
             }
           // Absorb leading spaces
           }	
+        */
+        if ((mode == MODE_START && (c == ' ' 
+             || (unsigned char) c == (unsigned char)0xC2))
+          &&
+           (i < l - 1)
+          &&
+             ((unsigned char)s[i + 1] == (unsigned char)0xA0)) 
+          {
+          i++;
+          }
+          // Absorb leading spaces
         else if (mode == MODE_START)
           {
           klib_string_append_byte (word, c);
           mode = MODE_WORD;
           }
+        else if ((mode == MODE_SPACE && (c == ' '
+             || (unsigned char) c == (unsigned char)0xC2))
+             &&
+             ((unsigned char)s[i + 1] == (unsigned char)0xA0)) 
+          {
+          i++;
+          }
+/*
         else if (mode == MODE_SPACE && (c == ' '
              || (unsigned char) c == (unsigned char)0xC2))
           {
@@ -511,6 +530,7 @@ void epub2txt_flush_para (const klib_String *para, int width, BOOL notrim)
               i++;
               }
           }
+*/
         else if (mode == MODE_SPACE)
           {
           mode = MODE_WORD;
