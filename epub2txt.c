@@ -486,7 +486,7 @@ void epub2txt_flush_para (const klib_String *para, int width, BOOL notrim)
         {
         char c = s[i];
 
-        /*if (mode == MODE_START && (c == ' ' 
+        if (mode == MODE_START && (c == ' ' 
              || (unsigned char) c == (unsigned char)0xC2))
           {
           if (i < l - 1)
@@ -498,7 +498,8 @@ void epub2txt_flush_para (const klib_String *para, int width, BOOL notrim)
             }
           // Absorb leading spaces
           }	
-        */
+        
+/*
         if ((mode == MODE_START && (c == ' ' 
              || (unsigned char) c == (unsigned char)0xC2))
           &&
@@ -509,6 +510,7 @@ void epub2txt_flush_para (const klib_String *para, int width, BOOL notrim)
           i++;
           }
           // Absorb leading spaces
+*/
         else if (mode == MODE_START)
           {
           klib_string_append_byte (word, c);
