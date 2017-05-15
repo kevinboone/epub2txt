@@ -878,10 +878,11 @@ void epub2txt_do_file (const char *file, BOOL ascii, int width, BOOL notrim,
     char cmd[512];
 
 
-    const char *kbox = getenv ("KBOX");
-    if (kbox)
-      sprintf (tempbase, "%s/tmp", kbox);
-    else
+    //This tmpdir offset is no longer necessary in KBOX3+
+    //const char *kbox = getenv ("KBOX");
+    //if (kbox)
+    //  sprintf (tempbase, "%s/tmp", kbox);
+    //else
       {
       if (getenv ("TMP"))
         strcpy (tempbase, getenv("TMP"));
