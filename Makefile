@@ -11,8 +11,8 @@ all: epub2txt
 
 VERSION=0.1.3
 
-CFLAGS=-g -Wall -DVERSION=\"$(VERSION)\" $(EXTRA_CFLAGS)
-LDFLAGS=$(EXTRA_LDFLAGS)
+MYCFLAGS=-g -Wall -DVERSION=\"$(VERSION)\" $(CFLAGS)
+MYLDFLAGS=$(LDFLAGS)
 
 
 APP_OBJS=main.o epub2txt.o
@@ -21,11 +21,11 @@ KLIB_OBJS=klib_error.o klib_object.o klib_string.o klib_log.o klib_buffer.o klib
 OBJS=$(APP_OBJS) $(KLIB_OBJS)
 
 epub2txt: $(OBJS)
-	#$(CC) $(LDFLAGS) -s -o $(APPNAME) $(OBJS) 
-	$(CC) $(LDFLAGS) -o $(APPNAME) $(OBJS) 
+	$(CC) $(MYLDFLAGS) -s -o $(APPNAME) $(OBJS) 
+	#$(CC) $(LMYDFLAGS) -o $(APPNAME) $(OBJS) 
 
 .c.o:
-	$(CC) $(CFLAGS) -o $*.o -c $*.c
+	$(CC) $(MYCFLAGS) -o $*.o -c $*.c
 
 clean:
 	rm -f *.o $(APPNAME) *stackdump
