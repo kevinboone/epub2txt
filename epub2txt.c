@@ -163,6 +163,8 @@ void epub2txt_translate_entity (const char *in, char *out)
     strcpy (out, "®");
   else if (strcasecmp (in, "trade") == 0) 
     strcpy (out, "™");
+  else if (strcasecmp (in, "quot") == 0) 
+    strcpy (out, "\"");
   else if (in[0] == '#')
     {
     char *s = strdup (in);
