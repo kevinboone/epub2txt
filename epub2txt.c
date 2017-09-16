@@ -55,7 +55,7 @@ klib_List *epub2txt_get_items (const char *opf, klib_Error **error)
     for (i = 0; i < l; i++)
       {
       XMLNode *r1 = root->children[i];
-      if (strcmp (r1->tag, "manifest") == 0)
+      if (strcmp (r1->tag, "manifest") == 0 || strcmp (r1->tag, "opf:manifest") == 0)
         {
         manifest = r1;
         got_manifest = TRUE;
@@ -74,7 +74,7 @@ klib_List *epub2txt_get_items (const char *opf, klib_Error **error)
     for (i = 0; i < l; i++)
       {
       XMLNode *r1 = root->children[i];
-      if (strcmp (r1->tag, "spine") == 0)
+      if (strcmp (r1->tag, "spine") == 0 || strcmp (r1->tag, "opf:spine") == 0)
         {
         int j, l2 = r1->n_children;
         for (j = 0; j < l2; j++)
@@ -489,17 +489,11 @@ void epub2txt_flush_para (const klib_String *para, int width, BOOL notrim)
         char c = s[i];
 
         if (mode == MODE_START && (c == ' ' 
-             || (unsigned char) c == (unsigned char)0xC2))
+             || ((unsigned char) c == (unsigned char)0xC2) && i < l - 1 && (unsigned char)s[i + 1] == (unsigned char)0xA0))
           {
-          if (i < l - 1)
-            {
-            if ((unsigned char)s[i + 1] == (unsigned char)0xA0) 
-              {
-              i++;
-              }
-            }
+          i+=c!=' ';
           // Absorb leading spaces
-          }	
+          }
         
 /*
         if ((mode == MODE_START && (c == ' ' 
@@ -518,12 +512,10 @@ void epub2txt_flush_para (const klib_String *para, int width, BOOL notrim)
           klib_string_append_byte (word, c);
           mode = MODE_WORD;
           }
-        else if ((mode == MODE_SPACE && (c == ' '
-             || (unsigned char) c == (unsigned char)0xC2))
-             &&
-             ((unsigned char)s[i + 1] == (unsigned char)0xA0)) 
+        else if (mode == MODE_SPACE && (c == ' '
+             || ((unsigned char) c == (unsigned char)0xC2 && i < l - 1 && (unsigned char)s[i + 1] == (unsigned char)0xA0)))
           {
-          i++;
+          i+=c!=' ';
           }
 /*
         else if (mode == MODE_SPACE && (c == ' '
