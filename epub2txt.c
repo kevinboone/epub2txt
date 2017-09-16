@@ -55,7 +55,7 @@ klib_List *epub2txt_get_items (const char *opf, klib_Error **error)
     for (i = 0; i < l; i++)
       {
       XMLNode *r1 = root->children[i];
-      if (strcmp (r1->tag, "manifest") == 0)
+      if (strcmp (r1->tag, "manifest") == 0 || strcmp (r1->tag, "opf:manifest") == 0)
         {
         manifest = r1;
         got_manifest = TRUE;
@@ -74,7 +74,7 @@ klib_List *epub2txt_get_items (const char *opf, klib_Error **error)
     for (i = 0; i < l; i++)
       {
       XMLNode *r1 = root->children[i];
-      if (strcmp (r1->tag, "spine") == 0)
+      if (strcmp (r1->tag, "spine") == 0 || strcmp (r1->tag, "opf:spine") == 0)
         {
         int j, l2 = r1->n_children;
         for (j = 0; j < l2; j++)
