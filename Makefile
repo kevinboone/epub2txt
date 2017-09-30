@@ -9,7 +9,7 @@ ETCDIR=/etc
 
 all: epub2txt 
 
-VERSION=0.1.4
+VERSION=0.1.5
 
 MYCFLAGS=-g -Wall -DVERSION=\"$(VERSION)\" $(CFLAGS)
 MYLDFLAGS=$(LDFLAGS)
