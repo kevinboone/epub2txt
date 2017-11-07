@@ -8,9 +8,7 @@ klib_convertutf.o: klib_convertutf.c klib_convertutf.h
 klib_getopt.o: klib_getopt.c klib_getopt.h klib_getoptspec.h klib_log.h klib_error.h
 klib_getoptspec.o: klib_getoptspec.c klib_getoptspec.h klib_string.h klib_error.h klib_log.h
 klib_log.o: klib_log.h klib_log.c
-klib_propsfile.o: klib_propsfile.c klib_propsfile.h klib_assocarray.h
-klib_assocarray.o: klib_assocarray.c klib_assocarray.h klib_nvpair.h
-klib_nvpair.o: klib_nvpair.c klib_nvpair.h klib_object.h
+klib_propsfile.o: klib_propsfile.c klib_propsfile.h 
 sxmlc.o: sxmlc.h sxmlc.c
 sxmlsearch.o: sxmlcsearch.h sxmlsearch.c
 sxmlutils.o: sxmlutils.h sxmlutils.c
