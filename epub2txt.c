@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #ifndef __APPLE__
-#include <malloc.h>
+//#include <malloc.h>
 #endif
 #include <errno.h>
 #include <ctype.h>
@@ -808,7 +808,7 @@ void epub2txt_parse_html (const char *filename, BOOL ascii,
       last_c = c;
       }
    
-    if (klib_string_length (para) > 0);
+    if (klib_string_length (para) > 0)
      epub2txt_flush_para (para, width, notrim); 
     klib_string_free (para);
     klib_wstring_free (tag);
@@ -880,9 +880,9 @@ void epub2txt_do_file (const char *file, BOOL ascii, int width, BOOL notrim,
   if (access (file, R_OK) == 0)
     {
     output_para = 0;
-    char tempdir[256];
+    char tempdir[512];
     char tempbase[256];
-    char cmd[512];
+    char cmd[1024];
 
 
     //This tmpdir offset is no longer necessary in KBOX3+
@@ -913,7 +913,7 @@ void epub2txt_do_file (const char *file, BOOL ascii, int width, BOOL notrim,
     system (cmd);
     klib_log_debug ("Permissions fixed");
     
-    char opf[512];
+    char opf[768];
     sprintf (opf, "%s/META-INF/container.xml", tempdir);
     klib_String *rootfile = epub2txt_get_root_file (opf, error);
     if (*error == NULL)
