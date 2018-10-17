@@ -9,9 +9,7 @@ klib_xml.c
 #include <errno.h>
 #include <unistd.h>
 #include <stdio.h>
-#ifndef __APPLE__
-#include <malloc.h>
-#endif
+#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "klib_log.h"
