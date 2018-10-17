@@ -9,9 +9,7 @@ klib_string.c
 #include <errno.h>
 #include <unistd.h>
 #include <stdio.h>
-#ifndef __APPLE__
-#include <malloc.h>
-#endif
+#include <stdlib.h>
 #include <wchar.h>
 #include <sys/types.h>
 #include <sys/stat.h>
