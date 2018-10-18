@@ -9,9 +9,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
-#ifndef __APPLE__
-//#include <malloc.h>
-#endif
 #include <errno.h>
 #include <ctype.h>
 #include "klib_log.h"
