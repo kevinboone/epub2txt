@@ -31,9 +31,9 @@ void klib_wstring_dispose (klib_Object *self);
 
 static klib_Spec klib_spec_wstring =
   {
-  obj_size: sizeof (klib_WString), 
-  init_fn: klib_wstring_init,
-  class_name: "klib_WString"
+  .obj_size = sizeof (klib_WString),
+  .init_fn = klib_wstring_init,
+  .class_name = "klib_WString"
   };
 
 typedef struct _klib_WString_priv

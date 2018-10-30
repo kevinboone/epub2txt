@@ -29,9 +29,9 @@ void klib_getoptspec_dispose (klib_Object *self);
 
 static klib_Spec klib_spec_getoptspec =
   {
-  obj_size: sizeof (klib_GetOptSpec), 
-  init_fn: klib_getoptspec_init,
-  class_name: "klib_GetOptSpec"
+  .obj_size = sizeof (klib_GetOptSpec),
+  .init_fn = klib_getoptspec_init,
+  .class_name = "klib_GetOptSpec"
   };
 
 typedef struct _klib_GetOptSpec_priv

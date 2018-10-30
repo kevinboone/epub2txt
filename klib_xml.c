@@ -27,9 +27,9 @@ void klib_xml_dispose (klib_Object *self);
 
 static klib_Spec klib_spec_xml =
   {
-  obj_size: sizeof (klib_Xml), 
-  init_fn: klib_xml_init,
-  class_name: "klib_Xml"
+  .obj_size = sizeof (klib_Xml),
+  .init_fn = klib_xml_init,
+  .class_name = "klib_Xml"
   };
 
 typedef struct _klib_Xml_priv

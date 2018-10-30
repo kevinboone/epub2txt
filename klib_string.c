@@ -29,9 +29,9 @@ void klib_string_dispose (klib_Object *self);
 
 static klib_Spec klib_spec_string =
   {
-  obj_size: sizeof (klib_String), 
-  init_fn: klib_string_init,
-  class_name: "klib_String"
+  .obj_size = sizeof (klib_String),
+  .init_fn = klib_string_init,
+  .class_name = "klib_String"
   };
 
 typedef struct _klib_String_priv
