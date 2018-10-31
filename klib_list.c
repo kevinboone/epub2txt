@@ -28,9 +28,9 @@ void klib_list_dispose (klib_Object *self);
 
 static klib_Spec klib_spec_list =
   {
-  obj_size: sizeof (klib_List), 
-  init_fn: klib_list_init,
-  class_name: "klib_List"
+  .obj_size = sizeof (klib_List),
+  .init_fn = klib_list_init,
+  .class_name = "klib_List"
   };
 
 typedef struct _klib_List_priv

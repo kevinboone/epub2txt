@@ -24,9 +24,9 @@ void klib_buffer_dispose (klib_Object *self);
 
 static klib_Spec klib_spec_buffer =
   {
-  obj_size: sizeof (klib_Buffer), 
-  init_fn: klib_buffer_init,
-  class_name: "klib_Buffer"
+  .obj_size = sizeof (klib_Buffer),
+  .init_fn = klib_buffer_init,
+  .class_name = "klib_Buffer"
   };
 
 typedef struct _klib_Buffer_priv

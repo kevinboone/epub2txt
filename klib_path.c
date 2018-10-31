@@ -29,9 +29,9 @@ void klib_path_dispose (klib_Object *self);
 
 static klib_Spec klib_spec_path =
   {
-  obj_size: sizeof (klib_Path), 
-  init_fn: klib_path_init,
-  class_name: "klib_Path"
+  .obj_size = sizeof (klib_Path),
+  .init_fn = klib_path_init,
+  .class_name = "klib_Path"
   };
 
 typedef struct _klib_Path_priv

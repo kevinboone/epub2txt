@@ -20,9 +20,9 @@ void klib_error_dispose (klib_Object *self);
 
 static klib_Spec klib_spec_error =
   {
-  obj_size: sizeof (klib_Error), 
-  init_fn: klib_error_init,
-  class_name: "klib_Error"
+  .obj_size = sizeof (klib_Error),
+  .init_fn = klib_error_init,
+  .class_name = "klib_Error"
   };
 
 typedef struct _klib_Error_priv
